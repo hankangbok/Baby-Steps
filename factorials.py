@@ -11,6 +11,7 @@ def doafactorial(somenumber,thepower):
     print total
     return total
 
+    
 print "Lets test this out"
 print doafactorial(5,2)
 print doafactorial(0,1)
