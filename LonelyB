@@ -4,7 +4,7 @@ class Solution(object):
         :type picture: List[List[str]]
         :rtype: int
         """
-        print picture
+        #print picture
         #This method is not the fastest, I'm just curious if it would work.
         if not picture:
             return 0
@@ -13,37 +13,33 @@ class Solution(object):
         counter=0
         rowcount=0
         indices=[]
+        blacklist=[]
         i=0
         while i<clength:
-            print i
+            #print i
             j=0
             while j<rlength:
-                print picture[i]
+#                print picture[i]
                 if picture[i][j]=='B':
-                    print "We gotta B real"
                     rowcount+=1
                     indices.append([j,i])
-                    print indices
                     if rowcount>1:
+                        blacklist.append(j)
                         indices=indices[:-2]
-                        j=rlength
-                        print "stop"
-                        #print indices
-                #rowcount=0        
+                        print "new row"
                 j+=1
             rowcount=0
             i+=1
+        print "This is the blacklist", blacklist
         validrow=[]    
         #now we have the B's that are  alone in their row
         #need to narrow it down to the ones alone in their column
         for k in indices:
-            print indices
-            print k[0]
             if k[0] in validrow:
                 validrow.remove(k[0])
-            else:
+                blacklist.append(k[0])
+            elif k[0] not in blacklist: #and k[0] not in validrow:
                 validrow.append(k[0])
-                print validrow
 
         print len(validrow)
         return len(validrow)
